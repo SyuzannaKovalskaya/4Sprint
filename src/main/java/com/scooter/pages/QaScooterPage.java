@@ -12,22 +12,24 @@ import java.time.Duration;
 public class QaScooterPage {
     //Вопросы о важном
     //Кноки заказать вверху и внизу
-    WebDriver driver;
+    private WebDriver driver;
 
     public QaScooterPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void scrollToElement(WebElement element) {
+    public void scrollToQuestionTitle() {
+        WebElement element = driver.findElement(questionTitle);
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].scrollIntoView();", element);
     }
 
-    public By questionElementTitle = By.xpath(".//div[contains(text(), 'Вопросы о важном')]");
 
-    public By orderUpButton = By.xpath("(.//button[contains(text(), 'Заказать')])[1]");
+    private By questionTitle = By.xpath(".//div[contains(text(), 'Вопросы о важном')]");
 
-    public By orderDownButton = By.xpath("(.//button[contains(text(), 'Заказать')])[2]");
+    private By orderUpButton = By.xpath("(.//button[contains(text(), 'Заказать')])[1]");
+
+    private By orderDownButton = By.xpath("(.//button[contains(text(), 'Заказать')])[2]");
 
     public OrderPage clickOrderUpButton() {
         driver.findElement(orderUpButton).click();

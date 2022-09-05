@@ -5,19 +5,19 @@ import org.openqa.selenium.WebDriver;
 
 public class OrderRentPage {
     //2 страница заказа
-    WebDriver driver;
+    private WebDriver driver;
 
     public OrderRentPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public By dateWhenInput = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
-    public By rentPeriodInput = By.xpath(".//div[contains(text(), '* Срок аренды')]/../..");
-    public By blackCheckBox = By.id("black");
-    public By greyCheckBox = By.id("gray");
-    public By commentInput = By.xpath(".//input[@placeholder='Комментарий для курьера']");
-    public By orderButton = By.xpath("(.//button[text()='Заказать'])[2]");
-    public By backButton = By.xpath(".//button[text()='Назад']");
+    private By dateWhenInput = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
+    private By rentPeriodInput = By.xpath(".//div[contains(text(), '* Срок аренды')]/../..");
+    private By blackCheckBox = By.id("black");
+    private By greyCheckBox = By.id("gray");
+    private By commentInput = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+    private By orderButton = By.xpath("(.//button[text()='Заказать'])[2]");
+    private By backButton = By.xpath(".//button[text()='Назад']");
 
     public void setDateWhenInput(String text) {
         driver.findElement(dateWhenInput).sendKeys(text);

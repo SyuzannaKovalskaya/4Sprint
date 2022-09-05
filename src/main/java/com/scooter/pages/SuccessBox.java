@@ -5,13 +5,13 @@ import org.openqa.selenium.WebDriver;
 
 public class SuccessBox {
     //Итоговый экран в firefox, с номером заказа
-    WebDriver driver;
+    private WebDriver driver;
 
     public SuccessBox(WebDriver driver) {
         this.driver = driver;
     }
 
-    public By messageTitle = By.xpath(".//div[text()='Заказ оформлен']");
+    private By messageTitle = By.xpath(".//div[text()='Заказ оформлен']");
 
     public String getTitle() {
         String message = driver.findElement(messageTitle).getText();

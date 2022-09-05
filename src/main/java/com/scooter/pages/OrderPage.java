@@ -5,18 +5,18 @@ import org.openqa.selenium.WebDriver;
 
 public class OrderPage {
     //1 страница заказа
-    WebDriver driver;
+    private WebDriver driver;
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public By nameInput = By.cssSelector("input[placeholder='* Имя']");
-    public By secondNameInput = By.cssSelector("input[placeholder='* Фамилия']");
-    public By addressInput = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
-    public By stationInput = By.xpath(".//input[contains(@placeholder, '* Станция метро')]/../..");
-    public By phoneInput = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
-    public By nextButton = By.xpath(".//button[contains(text(), 'Далее')]");
+    private By nameInput = By.cssSelector("input[placeholder='* Имя']");
+    private By secondNameInput = By.cssSelector("input[placeholder='* Фамилия']");
+    private By addressInput = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
+    private By stationInput = By.xpath(".//input[contains(@placeholder, '* Станция метро')]/../..");
+    private By phoneInput = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
+    private By nextButton = By.xpath(".//button[contains(text(), 'Далее')]");
 
 
     public void setNameInput(String text) {
