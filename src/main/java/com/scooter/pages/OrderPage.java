@@ -2,7 +2,6 @@ package com.scooter.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class OrderPage {
     //1 страница заказа
@@ -12,64 +11,50 @@ public class OrderPage {
         this.driver = driver;
     }
 
-    private By nameInput = By.cssSelector("input[placeholder='* Имя']");
-    private By secondNameInput = By.cssSelector("input[placeholder='* Фамилия']");
-    private By addressInput = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
-    private By stationInput = By.xpath(".//input[contains(@placeholder, '* Станция метро')]/../..");
-    private By phoneInput = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
-    private By nextButton = By.xpath(".//button[contains(text(), 'Далее')]");
+    public By nameInput = By.cssSelector("input[placeholder='* Имя']");
+    public By secondNameInput = By.cssSelector("input[placeholder='* Фамилия']");
+    public By addressInput = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
+    public By stationInput = By.xpath(".//input[contains(@placeholder, '* Станция метро')]/../..");
+    public By phoneInput = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
+    public By nextButton = By.xpath(".//button[contains(text(), 'Далее')]");
 
-    public WebElement getNameInput() {
-        return driver.findElement(nameInput);
-    }
-
-    public WebElement getSecondNameInput() {
-        return driver.findElement(secondNameInput);
-    }
-
-    public WebElement getAddressInput() {
-        return driver.findElement(addressInput);
-    }
-
-    public WebElement getStationInput() {
-        return driver.findElement(stationInput);
-    }
-
-    public WebElement getPhoneInput() {
-        return driver.findElement(phoneInput);
-    }
-
-    public WebElement getNextButton() {
-        return driver.findElement(nextButton);
-    }
 
     public void setNameInput(String text) {
-        getNameInput().sendKeys(text);
+        driver.findElement(nameInput).sendKeys(text);
     }
 
     public void setSecondNameInput(String text) {
-        getSecondNameInput().sendKeys(text);
+        driver.findElement(secondNameInput).sendKeys(text);
     }
 
     public void setAddressInput(String text) {
-        getAddressInput().sendKeys(text);
+        driver.findElement(addressInput).sendKeys(text);
     }
 
     public void setStationInput(String text) {
-        getStationInput()
+        driver.findElement(stationInput)
                 .findElement(By.xpath(".//input[contains(@placeholder, '* Станция метро')]"))
                 .sendKeys(text);
-        getStationInput()
+        driver.findElement(stationInput)
                 .findElement(By.xpath("(.//button[contains(@class, 'select-search__option')])[1]"))
                 .click();
     }
 
     public void setPhoneInput(String text) {
-        getPhoneInput().sendKeys(text);
+        driver.findElement(phoneInput).sendKeys(text);
     }
 
     public OrderRentPage clickNextButton() {
-        getNextButton().click();
+        driver.findElement(nextButton).click();
         return new OrderRentPage(driver);
     }
+
+    public void fillOrderPage(String name, String secondName, String address, String station, String phone) {
+        setNameInput(name);
+        setSecondNameInput(secondName);
+        setAddressInput(address);
+        setStationInput(station);
+        setPhoneInput(phone);
+    }
+
 }

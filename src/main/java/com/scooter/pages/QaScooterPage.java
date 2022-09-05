@@ -18,36 +18,27 @@ public class QaScooterPage {
         this.driver = driver;
     }
 
-    private By questionElementTitle = By.xpath(".//div[contains(text(), 'Вопросы о важном')]");
-    private By orderUpButton = By.xpath("(.//button[contains(text(), 'Заказать')])[1]");
-    private By orderDownButton = By.xpath("(.//button[contains(text(), 'Заказать')])[2]");
-
-    public WebElement getOrderUpButton() {
-        return driver.findElement(orderUpButton);
-    }
-
-    public WebElement getOrderDownButton() {
-        return driver.findElement(orderDownButton);
-    }
-
-    public WebElement getQuestionElementTitle() {
-        return driver.findElement(questionElementTitle);
-    }
-
-    public OrderPage clickOrderUpButton() {
-        getOrderUpButton().click();
-        return new OrderPage(driver);
-    }
-
-    public OrderPage clickOrderDownButton() {
-        getOrderDownButton().click();
-        return new OrderPage(driver);
-    }
-
     public void scrollToElement(WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].scrollIntoView();", element);
     }
+
+    public By questionElementTitle = By.xpath(".//div[contains(text(), 'Вопросы о важном')]");
+
+    public By orderUpButton = By.xpath("(.//button[contains(text(), 'Заказать')])[1]");
+
+    public By orderDownButton = By.xpath("(.//button[contains(text(), 'Заказать')])[2]");
+
+    public OrderPage clickOrderUpButton() {
+        driver.findElement(orderUpButton).click();
+        return new OrderPage(driver);
+    }
+
+    public OrderPage clickOrderDownButton() {
+        driver.findElement(orderDownButton).click();
+        return new OrderPage(driver);
+    }
+
 
     public String getTextPanel(By heading, By panel) {
         WebElement accordionHeading = driver.findElement(heading);

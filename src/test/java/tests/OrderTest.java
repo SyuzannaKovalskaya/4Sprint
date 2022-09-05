@@ -1,73 +1,92 @@
 package tests;
 
 import com.scooter.pages.*;
+import com.scooter.pages.constans.ConstantsDataForKolya;
+import com.scooter.pages.constans.ConstantsDataForSveta;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class OrderTest extends MainTest {
-    //Заказ с верхней кнопки заказать и для Вовы и для Коли
-    //Заказ с нижней кнопки заказать и для Вовы и для Коли
+public class OrderTest extends BaseTest {
+    //Заказ с верхней кнопки заказать для Коли и Светы
+    //Заказ с нижней кнопки заказать  для Коли и Светы
 
     @Test
-    public void fullOrderTestOnUpButtonData1() {
+    public void fullOrderTestOnUpButtonDataForKolya() {
         QaScooterPage qaScooterPage = new QaScooterPage(driver);
         OrderPage orderPage = qaScooterPage.clickOrderUpButton();
-        orderTestData1(orderPage);
+        orderTestData(orderPage,
+                ConstantsDataForKolya.NAME,
+                ConstantsDataForKolya.SECOND_NAME,
+                ConstantsDataForKolya.ADDRESS,
+                ConstantsDataForKolya.STATION,
+                ConstantsDataForKolya.PHONE,
+                ConstantsDataForKolya.DATE,
+                ConstantsDataForKolya.PERIOD,
+                ConstantsDataForKolya.COMMENT
+        );
     }
 
     @Test
-    public void fullOrderTestOnDownButtonData1() {
+    public void fullOrderTestOnDownButtonDataForKolya() {
         QaScooterPage qaScooterPage = new QaScooterPage(driver);
-        qaScooterPage.scrollToElement(qaScooterPage.getOrderDownButton());
+        qaScooterPage.scrollToElement(
+                driver.findElement(qaScooterPage.orderDownButton)
+        );
         OrderPage orderPage = qaScooterPage.clickOrderDownButton();
-        orderTestData1(orderPage);
+        orderTestData(orderPage,
+                ConstantsDataForKolya.NAME,
+                ConstantsDataForKolya.SECOND_NAME,
+                ConstantsDataForKolya.ADDRESS,
+                ConstantsDataForKolya.STATION,
+                ConstantsDataForKolya.PHONE,
+                ConstantsDataForKolya.DATE,
+                ConstantsDataForKolya.PERIOD,
+                ConstantsDataForKolya.COMMENT
+        );
     }
 
     @Test
-    public void fullOrderTestOnUpButtonData2() {
+    public void fullOrderTestOnUpButtonDataForSveta() {
         QaScooterPage qaScooterPage = new QaScooterPage(driver);
         OrderPage orderPage = qaScooterPage.clickOrderUpButton();
-        orderTestData1(orderPage);
+        orderTestData(orderPage,
+                ConstantsDataForSveta.NAME,
+                ConstantsDataForSveta.SECOND_NAME,
+                ConstantsDataForSveta.ADDRESS,
+                ConstantsDataForSveta.STATION,
+                ConstantsDataForSveta.PHONE,
+                ConstantsDataForSveta.DATE,
+                ConstantsDataForSveta.PERIOD,
+                ConstantsDataForSveta.COMMENT
+        );
     }
 
     @Test
-    public void fullOrderTestOnDownButtonData2() {
+    public void fullOrderTestOnDownButtonDataForSveta() {
         QaScooterPage qaScooterPage = new QaScooterPage(driver);
-        qaScooterPage.scrollToElement(qaScooterPage.getOrderDownButton());
+        qaScooterPage.scrollToElement(
+                driver.findElement(qaScooterPage.orderDownButton)
+        );
         OrderPage orderPage = qaScooterPage.clickOrderDownButton();
-        orderTestData1(orderPage);
+        orderTestData(orderPage,
+                ConstantsDataForSveta.NAME,
+                ConstantsDataForSveta.SECOND_NAME,
+                ConstantsDataForSveta.ADDRESS,
+                ConstantsDataForSveta.STATION,
+                ConstantsDataForSveta.PHONE,
+                ConstantsDataForSveta.DATE,
+                ConstantsDataForSveta.PERIOD,
+                ConstantsDataForSveta.COMMENT
+        );
     }
 
-    private void orderTestData1(OrderPage orderPage) {
-        orderPage.setNameInput("Вова");
-        orderPage.setSecondNameInput("Васильев");
-        orderPage.setAddressInput("Москва");
-        orderPage.setStationInput("Черкизовская");
-        orderPage.setPhoneInput("89998888888");
+    private void orderTestData(OrderPage orderPage, String name, String secondName, String address, String station, String phone, String date, String period, String comment) {
+        orderPage.fillOrderPage(name, secondName, address, station, phone);
         OrderRentPage orderRentPage = orderPage.clickNextButton();
-        orderRentPage.setDateWhenInput("22.02.2023");
-        orderRentPage.setRentPeriodInput("двое суток");
-        orderRentPage.setBlackCheckBox();
-        orderRentPage.setCommentInput("привет");
+        orderRentPage.fillOrderRentPage(date, period, comment);
         OrderBox orderBox = orderRentPage.clickOrderButton();
-        SuccsessBox succsessBox = orderBox.clickYesButton();
-        Assert.assertEquals("Заказ оформлен", succsessBox.getTitle());
-    }
-
-    private void orderTestData2(OrderPage orderPage) {
-        orderPage.setNameInput("Коля");
-        orderPage.setSecondNameInput("Токарев");
-        orderPage.setAddressInput("Самара");
-        orderPage.setStationInput("Сокольники");
-        orderPage.setPhoneInput("89997778811");
-        OrderRentPage orderRentPage = orderPage.clickNextButton();
-        orderRentPage.setDateWhenInput("19.01.2023");
-        orderRentPage.setRentPeriodInput("четверо суток");
-        orderRentPage.setBlackCheckBox();
-        orderRentPage.setCommentInput("пока");
-        OrderBox orderBox = orderRentPage.clickOrderButton();
-        SuccsessBox succsessBox = orderBox.clickYesButton();
-        Assert.assertEquals("Заказ оформлен", succsessBox.getTitle());
+        SuccessBox successBox = orderBox.clickYesButton();
+        Assert.assertEquals("Заказ оформлен", successBox.getTitle());
     }
 
 }

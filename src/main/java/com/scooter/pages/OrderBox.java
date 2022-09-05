@@ -2,7 +2,6 @@ package com.scooter.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class OrderBox {
     //Подтверждение заказа
@@ -12,14 +11,10 @@ public class OrderBox {
         this.driver = driver;
     }
 
-    private By yesButton = By.xpath(".//button[text()='Да']");
+    public By yesButton = By.xpath(".//button[text()='Да']");
 
-    public WebElement getYesButton() {
-        return driver.findElement(yesButton);
-    }
-
-    public SuccsessBox clickYesButton() {
-        getYesButton().click();
-        return new SuccsessBox(driver);
+    public SuccessBox clickYesButton() {
+        driver.findElement(yesButton).click();
+        return new SuccessBox(driver);
     }
 }

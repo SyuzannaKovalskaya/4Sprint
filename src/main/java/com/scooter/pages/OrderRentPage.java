@@ -2,7 +2,6 @@ package com.scooter.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class OrderRentPage {
     //2 страница заказа
@@ -12,73 +11,53 @@ public class OrderRentPage {
         this.driver = driver;
     }
 
-    private By dateWhenInput = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
-    private By rentPeriodInput = By.xpath(".//div[contains(text(), '* Срок аренды')]/../..");
-    private By blackCheckBox = By.id("black");
-    private By greyCheckBox = By.id("gray");
-    private By commentInput = By.xpath(".//input[@placeholder='Комментарий для курьера']");
-    private By orderButton = By.xpath("(.//button[text()='Заказать'])[2]");
-    private By backButton = By.xpath(".//button[text()='Назад']");
-
-    public WebElement getDateWhenInput() {
-        return driver.findElement(dateWhenInput);
-    }
+    public By dateWhenInput = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
+    public By rentPeriodInput = By.xpath(".//div[contains(text(), '* Срок аренды')]/../..");
+    public By blackCheckBox = By.id("black");
+    public By greyCheckBox = By.id("gray");
+    public By commentInput = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+    public By orderButton = By.xpath("(.//button[text()='Заказать'])[2]");
+    public By backButton = By.xpath(".//button[text()='Назад']");
 
     public void setDateWhenInput(String text) {
-        getDateWhenInput().sendKeys(text);
-    }
-
-    public WebElement getRentPeriodInput() {
-        return driver.findElement(rentPeriodInput);
+        driver.findElement(dateWhenInput).sendKeys(text);
     }
 
     public void setRentPeriodInput(String text) {
-        getRentPeriodInput()
+        driver.findElement(rentPeriodInput)
                 .findElement(By.xpath("//span"))
                 .click();
-        getRentPeriodInput()
+        driver.findElement(rentPeriodInput)
                 .findElement(By.xpath("//div[@class='Dropdown-menu']/div[text()='" + text + "']"))
                 .click();
     }
 
-    public WebElement getBlackCheckBox() {
-        return driver.findElement(blackCheckBox);
-    }
-
     public void setBlackCheckBox() {
-        getBlackCheckBox().click();
-    }
-
-    public WebElement getGreyCheckBox() {
-        return driver.findElement(greyCheckBox);
+        driver.findElement(blackCheckBox).click();
     }
 
     public void setGreyCheckBox() {
-        getGreyCheckBox().click();
-    }
-
-    public WebElement getCommentInput() {
-        return driver.findElement(commentInput);
+        driver.findElement(greyCheckBox).click();
     }
 
     public void setCommentInput(String text) {
-        getCommentInput().sendKeys(text);
-    }
-
-    public WebElement getOrderButton() {
-        return driver.findElement(orderButton);
+        driver.findElement(commentInput).sendKeys(text);
     }
 
     public OrderBox clickOrderButton() {
-        getOrderButton().click();
+        driver.findElement(orderButton).click();
         return new OrderBox(driver);
     }
 
-    public WebElement getBackButton() {
-        return driver.findElement(backButton);
+    public void clickBackButton() {
+        driver.findElement(backButton).click();
     }
 
-    public void clickBackButton() {
-        getBackButton().click();
+    public void fillOrderRentPage(String date, String period, String comment) {
+        setDateWhenInput(date);
+        setRentPeriodInput(period);
+        setBlackCheckBox();
+        setCommentInput(comment);
     }
+
 }
